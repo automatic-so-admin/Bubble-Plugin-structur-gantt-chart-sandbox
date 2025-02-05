@@ -33,9 +33,11 @@ function initialize (instance, context) {
     }];
     
     const today = new Date();
-    const twelveDaysAgo = new Date(today.getTime() - 12 * 24 * 60 * 60 * 1000);
+    //const twelveDaysAgo = new Date(today.getTime() - 12 * 24 * 60 * 60 * 1000);
     
     let taskDragging = false;
+    let draggedTask = null;
+    let affectedTasks = new Map(); // Store all tasks affected by the drag with their new dates
     let lastTask = null;
     let lastStart = null;
     let lastEnd = null;
@@ -43,7 +45,7 @@ function initialize (instance, context) {
     
     const options = {
         popup: false,
-        scroll_to: twelveDaysAgo,
+        //scroll_to: twelveDaysAgo,
         popup_on: 'hover',       
         custom_popup_html: null,
         handle_display: 'hover',
@@ -60,70 +62,6 @@ function initialize (instance, context) {
             </div>`;
             return taskDetails
         },
-/*
-        on_date_change: async function(task, start, end) {
-            instance.data.reset = false;
-            instance.data.changedDate.push({task: })
-
-            console.log(taskDragging)
-            lastTask = task;
-            lastStart = start;
-            lastEnd = end;
-            //instance.data.reset = false;
-            //instance.data.changeDateParams = [task, start, end];
-            //console.log(start,end);
-            //save in array
-            //always check last array data is not equal to current data then save - now if last array data is equal to current data then change
-            // - last array data === current data condition will never be executed because dragging item will always change its data
-            //if array is not empty on mouse down event then process date change if empty dont do anything
-            //setupPolyMarker();
-            if (!taskDragging) {
-                taskDragging = true;
-                //const ganttElement = document.getElementById('gantt');
-                //const existingListener = ganttElement.getAttribute('data-mouseup-listener');
-                
-                //if(!existingListener){
-                document.querySelector('.gantt').addEventListener('mouseup', () => {
-                    taskDragging = false;
-                    instance.publishState('task_id', lastTask.id);
-                    instance.publishState('task_name', lastTask.name);
-                    instance.publishState('changed_task_start_date', lastStart);
-                    instance.publishState('changed_task_end_date', lastEnd);
-
-
-                    instance.triggerEvent("date_changed");
-
-                }, {once: true});
-
-            }
-  
-            //}
-            
-			
-
-            /*
-            const draggingItem = (task.start.getTime() !== start.getTime() && task.end.getTime() !== end.getTime());
-           console.log('isTaskDragging?: ', draggingTask)
-
-            if (!draggingItem && (task.start > end || task.end < start)){
-            	instance.triggerEvent('date_exceeded');
-            }
-            else{
-            	instance.data.dateChangedTasks.push({task, start, end});
-                if(task.dependencies.length === 0) 
-                instance.triggerEvent('process_date_change');
-
-                instance.publishState('task_id', task.id);
-                instance.publishState('task_name', task.name);
-                instance.publishState('changed_task_start_date', start);
-                instance.publishState('changed_task_end_date', end);
-                instance.data.reset = false;
-
-                instance.triggerEvent("date_changed");
-            }
-            */
-
-        //},
         on_progress_change: async function(task, progress) {
             instance.publishState('task_id', task.id);
             instance.publishState('changed_task_progress', progress/100);
@@ -137,86 +75,6 @@ function initialize (instance, context) {
                 instance.triggerEvent('task_clicked');
             }
         },    
-/*
-        on_render: function() {
-            console.log('on_render called');
-            
-            const bars = document.querySelectorAll('.bar-wrapper');
-            console.log('Found bars:', bars.length);
-            
-            bars.forEach(bar => {
-                const showHandles = () => {
-                    console.log('Showing handles for bar:', bar.getAttribute('data-id'));
-                    const handles = bar.querySelectorAll('.handle');
-                    console.log('Found handles:', handles.length);
-                    handles.forEach(handle => {
-                        console.log('Handle type:', handle.classList);
-                        handle.style.display = 'block';
-                        handle.style.visibility = 'visible';
-                        handle.style.opacity = '1';
-                    });
-                };
-
-                const hideHandles = (e) => {
-                    console.log('Hide handles called');
-                    console.log('Dragging state:', bar.classList.contains('dragging'));
-                    console.log('Related target:', e.relatedTarget);
-                    if (bar.classList.contains('dragging')) {
-                        console.log('Prevented hide due to dragging');
-                        return;
-                    }
-                    
-                    if (e.relatedTarget && (
-                        e.relatedTarget.classList.contains('handle') ||
-                        e.relatedTarget.closest('.handle') ||
-                        e.relatedTarget.closest('.bar-wrapper') === bar
-                    )) {
-                        console.log('Prevented hide due to related target');
-                        return;
-                    }
-                    
-                    const handles = bar.querySelectorAll('.handle');
-                    handles.forEach(handle => {
-                        handle.style.display = 'none';
-                        handle.style.visibility = 'hidden';
-                        handle.style.opacity = '0';
-                    });
-                };
-
-                // Add mousedown handler to handles
-                const handles = bar.querySelectorAll('.handle');
-                handles.forEach(handle => {
-                    handle.addEventListener('mousedown', () => {
-                        console.log('Handle mousedown, adding dragging class');
-                        bar.classList.add('dragging');
-                    });
-                });
-
-                document.addEventListener('mouseup', () => {
-                    console.log('Document mouseup');
-                    console.log('Bar hover state:', bar.matches(':hover'));
-                    bar.classList.remove('dragging');
-                    if (!bar.matches(':hover')) {
-                        hideHandles({ relatedTarget: null });
-                    }
-                });
-
-                bar.addEventListener('mouseenter', showHandles);
-                bar.addEventListener('mouseleave', hideHandles);
-
-                handles.forEach(handle => {
-                    handle.addEventListener('mouseenter', () => {
-                        console.log('Handle mouseenter');
-                        showHandles();
-                    });
-                    handle.addEventListener('mouseleave', (e) => {
-                        console.log('Handle mouseleave');
-                        console.log('Leaving to:', e.relatedTarget);
-                        hideHandles(e);
-                    });
-                });
-            });
-        }*/
     }
 
     instance.data.gantt = new Gantt("#gantt", initialData, options);
@@ -1186,53 +1044,54 @@ function update (instance, properties, context) {
         return observer;
     };
     
-    let taskDragging = false;
-    let lastTask = null;
-    let lastStart = null;
-    let lastEnd = null;
-   
     function addOnDateChangeOption() {
         const oldOption = instance.data.gantt.options;
-        const onDateChange = function(task, start, end) {
-            // Find the actual parent task if this is a child task
-            const actualTask = findParentTask(task, instance.data.tasks) || task;
-            
-            lastTask = actualTask;
-            lastStart = start;
-            lastEnd = end;
-
-            if (!taskDragging) {
-                taskDragging = true;
-
-                const ganttElement = document.getElementById('gantt');
-                const existingListener = ganttElement.getAttribute('data-mouseup-listener');
-
-                if (!existingListener) {
-                    ganttElement.addEventListener('mouseup', async () => {
-                        taskDragging = false;
-
-                        // Publish only task ID and date changes
-                        instance.publishState('task_id', actualTask.id);
-                        instance.publishState('changed_task_start_date', lastStart);
-                        instance.publishState('changed_task_end_date', lastEnd);
-                        instance.data.reset = false;
-
-                        await instance.triggerEvent("date_changed");
-                    }, { once: true });
-                    
-                    ganttElement.setAttribute('data-mouseup-listener', 'true');
-                }
-            } 
-        };
+        const dragStates = new Map(); // Store state for each task separately
         
-        // Helper function to find parent task
-        function findParentTask(task, allTasks) {
-            // Look through all tasks to find if any task has this task's ID in its dependencies
-            return allTasks.find(potentialParent => {
-                const deps = potentialParent.dependencies ? potentialParent.dependencies.split(',') : [];
-                return deps.includes(task.id);
+        const onDateChange = function(task, start, end) {
+            console.log('Date change detected:', { task, start, end });
+            
+            // Create or update state for this task
+            dragStates.set(task.id, {
+                task: task,
+                start: start,
+                end: end,
+                isDragging: true
             });
-        }
+            
+            const ganttElement = document.getElementById('gantt');
+            
+            // Create a unique handler for this task
+            const handleMouseUp = () => {
+                console.log('Mouse up detected for task:', task.id);
+                
+                // Get the final state for this task
+                const state = dragStates.get(task.id);
+                if (state) {
+                    console.log('Firing event for task:', {
+                        taskId: state.task.id,
+                        start: state.start,
+                        end: state.end
+                    });
+                    
+                    // Fire event for this specific task
+                    instance.publishState('task_id', state.task.id);
+                    instance.publishState('changed_task_start_date', state.start);
+                    instance.publishState('changed_task_end_date', state.end);
+                    instance.triggerEvent("date_changed");
+                    
+                    // Clean up state for this task
+                    dragStates.delete(task.id);
+                }
+                
+                // Clean up the event listener
+                ganttElement.removeEventListener('mouseup', handleMouseUp);
+            };
+            
+            // Remove any existing listener and add new one
+            ganttElement.removeEventListener('mouseup', handleMouseUp);
+            ganttElement.addEventListener('mouseup', handleMouseUp);
+        };
 
         const newOption = {...oldOption, 'on_date_change': onDateChange}
         instance.data.gantt.options = newOption;

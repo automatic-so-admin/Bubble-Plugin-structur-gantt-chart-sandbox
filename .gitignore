@@ -1,5 +1,5 @@
 node_modules
 src/api/.secrets
 dist
-/EXAMPLE_PLUGIN_CODE
+EXAMPLE_PLUGIN_CODE
 .cursorrules
