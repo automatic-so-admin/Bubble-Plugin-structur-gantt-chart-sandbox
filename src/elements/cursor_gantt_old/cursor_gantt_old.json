@@ -1,6 +1,6 @@
 {
   "AAC": {
-    "display": "Structur GANTT (Sandbox)",
+    "display": "Structur Cursor Gantt",
     "category": "visual elements",
     "icon": "ion-ios-settings",
     "add_is_visible": true,
@@ -40,7 +40,7 @@
         "name": "data_type",
         "rank": 1,
         "editor": "custom_type",
-        "doc": "The data type that represents a task in your database"
+        "doc": "The data type that represents a task in your database. Test"
       },
       "AAE": {
         "caption": "Data Source",
@@ -79,7 +79,7 @@
       "AAI": {
         "caption": "Start Date",
         "name": "start_date",
-        "rank": 7,
+        "rank": 9,
         "editor": "custom_field_AAD",
         "field_type_restriction": "date",
         "doc": "The task's start date"
@@ -87,7 +87,7 @@
       "AAJ": {
         "caption": "End Date",
         "name": "end_date",
-        "rank": 8,
+        "rank": 10,
         "editor": "custom_field_AAD",
         "field_type_restriction": "date",
         "doc": "The task's end date"
@@ -95,7 +95,7 @@
       "AAK": {
         "caption": "Subtask ID(s) ",
         "name": "child_item_ids",
-        "rank": 9,
+        "rank": 11,
         "editor": "custom_field_AAD",
         "field_type_restriction": "text_image_file",
         "doc": "The ID of the related sub-elements (dependencies), formatted as text with each ID separated by comma (ex: \"id, id2, id3\")",
@@ -106,7 +106,7 @@
       "AAc": {
         "caption": "View Mode",
         "name": "view_mode",
-        "rank": 11,
+        "rank": 13,
         "editor": "DynamicValue",
         "value": "text",
         "options": "Day,Week,Month",
@@ -116,7 +116,7 @@
       "AAk": {
         "caption": "Show Static Columns?",
         "name": "show_table",
-        "rank": 12,
+        "rank": 14,
         "editor": "DynamicValue",
         "value": "boolean",
         "default_val": false,
@@ -125,7 +125,7 @@
       "AAm": {
         "caption": "Progress bar color",
         "name": "progress_color",
-        "rank": 21,
+        "rank": 23,
         "editor": "Color",
         "in_style": false,
         "default_val": "rgba(87,165,255,1)",
@@ -134,7 +134,7 @@
       "AAn": {
         "caption": "Header font color",
         "name": "table_header_font_color",
-        "rank": 23,
+        "rank": 25,
         "editor": "Color",
         "default_val": "rgba(0, 0, 0, 1)",
         "in_style": false,
@@ -143,7 +143,7 @@
       "AAo": {
         "caption": "Header color",
         "name": "table_header_color",
-        "rank": 24,
+        "rank": 26,
         "editor": "Color",
         "default_val": "rgba(254,189,18,1)",
         "in_style": false,
@@ -152,7 +152,7 @@
       "AAp": {
         "caption": "Row font color",
         "name": "table_row_font_color",
-        "rank": 22,
+        "rank": 24,
         "editor": "Color",
         "default_val": "rgba(0, 0, 0, 1)",
         "in_style": false,
@@ -161,7 +161,7 @@
       "AAr": {
         "caption": "Enable Progress Dragging",
         "name": "toggle_progress_dragging",
-        "rank": 13,
+        "rank": 15,
         "editor": "Checkbox",
         "value": "boolean",
         "default_val": true,
@@ -170,7 +170,7 @@
       "AAs": {
         "caption": "Enable Polymarkers",
         "name": "show_markers",
-        "rank": 14,
+        "rank": 16,
         "editor": "Checkbox",
         "value": "boolean",
         "default_val": true,
@@ -179,7 +179,7 @@
       "AAw": {
         "caption": "Header Date Font Color",
         "name": "header_date_font_color",
-        "rank": 25,
+        "rank": 27,
         "editor": "Color",
         "default_val": "rgba(0,0,0,1)",
         "doc": "Specifies the font color for the header date display.\""
@@ -187,7 +187,7 @@
       "AAx": {
         "caption": "Header Date Font Size",
         "name": "header_date_font_size",
-        "rank": 19,
+        "rank": 21,
         "editor": "StaticNumber",
         "optional": true,
         "doc": "Specifies the font size for the header date display"
@@ -195,7 +195,7 @@
       "AAy": {
         "caption": "Header Month Font Color",
         "name": "header_month_font_color",
-        "rank": 26,
+        "rank": 28,
         "editor": "Color",
         "default_val": "rgba(0,0,0,1)",
         "doc": "Specifies the font color for the header month display."
@@ -203,7 +203,7 @@
       "AAz": {
         "caption": "Header Month Font Size",
         "name": "header_month_font_size",
-        "rank": 20,
+        "rank": 22,
         "editor": "StaticNumber",
         "optional": true,
         "doc": "Specifies the font size for the header month display"
@@ -211,7 +211,7 @@
       "ABB": {
         "caption": "Marker Color",
         "name": "marker_color",
-        "rank": 28,
+        "rank": 30,
         "editor": "Color",
         "default_val": "rgba(255,165,0,1)",
         "doc": "Sets the color of the marker used to establish the relationship between tasks"
@@ -219,7 +219,7 @@
       "ABC": {
         "caption": "Connection Line Color",
         "name": "polyline_color",
-        "rank": 29,
+        "rank": 31,
         "editor": "Color",
         "default_val": "rgba(255,0,0,1)",
         "doc": "Specifies the color of the connection line created when linking two tasks."
@@ -227,7 +227,7 @@
       "ABE": {
         "caption": "Enable Label Movement",
         "name": "enable_label_movement",
-        "rank": 15,
+        "rank": 17,
         "editor": "Checkbox",
         "default_val": true,
         "doc": "Enable/Disable the task label to move horizontally within the bar as the user scrolls in the Gantt."
@@ -235,7 +235,7 @@
       "ABP": {
         "caption": "Tooltip background",
         "name": "tooltip_popup_background",
-        "rank": 27,
+        "rank": 29,
         "editor": "Color",
         "default_val": "rgba(234,234,234,1)",
         "doc": "Sets the background color of the tooltip."
@@ -243,7 +243,7 @@
       "ABS": {
         "caption": "Disable tooltip",
         "name": "disable_tooltip",
-        "rank": 17,
+        "rank": 19,
         "editor": "Checkbox",
         "default_val": false,
         "doc": "Enable/Disable the display of tooltips when hovering over task cards."
@@ -256,10 +256,27 @@
         "field_type_restriction": "text_image_file",
         "doc": "The description of the task"
       },
+      "ABZ": {
+        "caption": "Task Color",
+        "name": "bar_color",
+        "rank": 7,
+        "editor": "Color",
+        "in_style": false,
+        "default_val": "rgba(184,194,204,1)",
+        "doc": "Sets the background color of the task bars."
+      },
+      "ACA": {
+        "caption": "Default Task Color",
+        "name": "bar_color",
+        "rank": 8,
+        "editor": "Color",
+        "default_val": "rgba(184,194,204,1)",
+        "doc": "The default background color for tasks when no individual task color is specified"
+      },
       "ABY": {
         "caption": "Display Task Detail On Tooltip",
         "name": "display_task_detail_on_hover",
-        "rank": 10,
+        "rank": 12,
         "editor": "custom_field_AAD",
         "optional": true,
         "doc": "When tooltip is enabled, displays the value of the selected data_type."
@@ -267,7 +284,7 @@
       "ABk": {
         "caption": "Move Child with Parent",
         "name": "move_child_with_parent",
-        "rank": 16,
+        "rank": 18,
         "editor": "Checkbox",
         "default_val": false,
         "doc": "Enable/Disable the child to move with the parent tasks it is dragged or moved."
@@ -275,7 +292,7 @@
       "ABm": {
         "caption": "Styles & Formatting",
         "name": "Styles",
-        "rank": 18,
+        "rank": 20,
         "editor": "Label"
       },
       "ABn": {
@@ -287,7 +304,7 @@
       "ABo": {
         "caption": "Handle Bar Color",
         "name": "handle_bar_color",
-        "rank": 30,
+        "rank": 32,
         "editor": "Color",
         "default_val": "rgba(229,223,222,1)"
       }
@@ -425,7 +442,7 @@
         "initialization_code": {
           "fn": ""
         },
-        "doc": "Child task id when a polyline is drawn"
+        "doc": "Child task id when a polyline connection is drawn"
       }
     },
     "has_reset_fn": true,

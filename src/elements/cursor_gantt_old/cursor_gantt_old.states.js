@@ -23,12 +23,8 @@ function changed_task_progress (properties, context) {
 }
 
 function view_mode (properties, context) {
-    return [
-        {
-            "name": "view_mode",
-            "type": "text"
-        }
-    ];
+function r(e,n){function t(o,u){return[{name:"view_mode",type:"text"}]}return t(e,n)}return r(properties,context);
+
 }
 
 function task_name (properties, context) {

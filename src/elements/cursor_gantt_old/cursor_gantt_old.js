@@ -126,37 +126,16 @@ function initialize (instance, context) {
         //},
         on_progress_change: async function(task, progress) {
             instance.publishState('task_id', task.id);
-            instance.publishState('task_name', task.name);
             instance.publishState('changed_task_progress', progress/100);
             instance.data.reset = false;
-
-
-
             instance.triggerEvent("progress_changed");
         },
 
         on_click: async function(task) {
-
-            //createPopup(task);
             if (instance.data.reset) {
                 instance.publishState('task_id', task.id);
-                instance.publishState('task_name', task.name);
-                instance.publishState('progress', task.progress);
-                instance.publishState('start_date', task.start);            
-                instance.publishState('end_date', task.end);
-                //instance.publishState('parents', task.dependencies);
-
                 instance.triggerEvent('task_clicked');
             }
-            /*
-            else {
-            	if (instance.data.changeDateParams && instance.data.changeDateParams.length > 0) {
-                   const [task, start, end] = instance.data.changeDateParams;
-                    
-  
-                }
-            }*/
-
         },    
 /*
         on_render: function() {
@@ -1232,9 +1211,8 @@ function update (instance, properties, context) {
                     ganttElement.addEventListener('mouseup', async () => {
                         taskDragging = false;
 
-                        // Publish the correct parent task states
+                        // Publish only task ID and date changes
                         instance.publishState('task_id', actualTask.id);
-                        instance.publishState('task_name', actualTask.name);
                         instance.publishState('changed_task_start_date', lastStart);
                         instance.publishState('changed_task_end_date', lastEnd);
                         instance.data.reset = false;
@@ -1263,11 +1241,19 @@ function update (instance, properties, context) {
 
 
     
+    function getTaskColor(task) {
+        // If task_color field is specified and task has that field, use it
+        if (properties.task_color && task[properties.task_color]) {
+            return task[properties.task_color];
+        }
+        // Otherwise use default bar color
+        return properties.bar_color || '#b8c2cc';
+    }
+
     function init() {
         const ganttElement = document.getElementById('gantt');
         const existingListener = ganttElement.removeAttribute('data-mouseup-listener');
         instance.data.gantt.clear();
-
 
         if (properties.show_table && true){
             createTaskTable();
@@ -1277,7 +1263,6 @@ function update (instance, properties, context) {
             createColumnDivider();
             observeTableRowsForColumns(hideColumns);
         }
-
         else {
             if (document.getElementById('table-container')) {
                 document.getElementById('table-container').remove();
@@ -1292,37 +1277,47 @@ function update (instance, properties, context) {
             const ganttContainer = document.querySelector('.gantt-container');
             ganttContainer.style.width = `${bubbleElement.offsetWidth}px`;
         }
-        const style = document.createElement('style');
-        let innerHTML = "";
-        
-        
-        innerHTML =  `
-            .gantt .bar-progress {
-            	${properties.progress_color ? `fill: ${properties.progress_color} !important` : ""};
-            }
-            .bar-label {
-            	fill: ${properties.text_color} !important; /* Change font color to red */
-            }
-            .handle-group circle {
-            	display: block
-            }
-            .upper-text {
-            	color: ${properties.header_month_font_color} !important;
-            	${properties.header_month_font_size ? `font-size: ${properties.header_month_font_size}px !important;` : ""}
-            }
-			.lower-text {
-				${properties.header_date_font_size ? `font-size: ${properties.header_date_font_size}px !important;` : ""}
-			}
-			.lower-text:not(.current-date-highlight) {
-                color: ${properties.header_date_font_color} !important;
-            }
-		
-		`;
 
-        
-//        innerHTML = applyHandleVisibility(properties.toggle_progress_dragging, innerHTML, properties.disable_progress_dragging_controls);
+        // Create style element for dynamic styles
+        const style = document.createElement('style');
+        let innerHTML = `
+            .gantt .bar-progress {
+                fill: ${properties.progress_color || '#a3a3ff'} !important;
+            }
+            .gantt .bar {
+                fill: ${properties.bar_color || '#b8c2cc'} !important;
+            }
+            .gantt .bar-label {
+                fill: ${properties.text_color || '#000'} !important;
+                color: ${properties.text_color || '#000'} !important;
+            }
+            .gantt .grid-header .upper-text {
+                fill: ${properties.header_month_font_color || '#000'} !important;
+                color: ${properties.header_month_font_color || '#000'} !important;
+                ${properties.header_month_font_size ? `font-size: ${properties.header_month_font_size}px !important;` : ""}
+            }
+            .gantt .grid-header .lower-text {
+                ${properties.header_date_font_size ? `font-size: ${properties.header_date_font_size}px !important;` : ""}
+            }
+            .gantt .grid-header .lower-text:not(.current-date-highlight) {
+                fill: ${properties.header_date_font_color || '#000'} !important;
+                color: ${properties.header_date_font_color || '#000'} !important;
+            }
+            .gantt .grid-row:nth-child(even) {
+                fill: ${properties.grid_row_even_color || '#fff'} !important;
+            }
+            .gantt .grid-row:nth-child(odd) {
+                fill: ${properties.grid_row_odd_color || '#f5f5f5'} !important;
+            }
+            .gantt .today-highlight {
+                fill: ${properties.today_highlight_color || 'rgba(245, 245, 245, 0.5)'} !important;
+            }
+            .gantt .handle-group circle {
+                display: block;
+            }
+        `;
+
         innerHTML = applyHandleVisibility(properties.toggle_progress_dragging, innerHTML, false);
-        
         style.innerHTML = innerHTML;
         document.head.appendChild(style);
 
@@ -1331,10 +1326,8 @@ function update (instance, properties, context) {
         setLabelOption(properties.enable_label_movement);
         moveChildParent(properties.move_child_with_parent);
         setPopupOption(properties.disable_tooltip, properties.display_task_detail_on_hover, properties.tooltip_popup_background);
-      //  toggleTaskDragging(properties.enable_task_dragging);
-        //setPopupBackgroundColor(properties.hover_details_background_color);
         startBarWrapperObserver(() => {
-            handleBarWrappers();  // Get the updated handle styles
+            handleBarWrappers();
         });
     }
     
