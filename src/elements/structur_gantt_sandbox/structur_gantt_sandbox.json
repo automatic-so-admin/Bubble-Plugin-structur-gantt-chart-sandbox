@@ -1,0 +1,442 @@
+{
+  "AAC": {
+    "display": "Structur GANTT (Sandbox)",
+    "category": "visual elements",
+    "icon": "ion-ios-settings",
+    "add_is_visible": true,
+    "default_dim": {
+      "width": 400,
+      "height": 200
+    },
+    "code": {
+      "preview": {
+        "fn": ""
+      },
+      "initialize": {
+        "fn": ""
+      },
+      "update": {
+        "fn": ""
+      },
+      "reset": {
+        "fn": ""
+      }
+    },
+    "property_applications": {
+      "resizable": true,
+      "MinWidth": true,
+      "Background": true,
+      "Border": true,
+      "Padding": true,
+      "BoxShadow": true,
+      "Font": true
+    },
+    "can_fit_width": true,
+    "can_fit_height": true,
+    "add_hover_pressed": true,
+    "fields": {
+      "AAD": {
+        "caption": "Data Type",
+        "name": "data_type",
+        "rank": 1,
+        "editor": "custom_type",
+        "doc": "The data type that represents a task in your database"
+      },
+      "AAE": {
+        "caption": "Data Source",
+        "name": "data_source",
+        "rank": 2,
+        "editor": "DynamicValue",
+        "value": "custom_data_AAD",
+        "is_list": true,
+        "doc": "The source of list of tasks to display"
+      },
+      "AAF": {
+        "caption": "ID",
+        "name": "id",
+        "rank": 3,
+        "editor": "custom_field_AAD",
+        "field_type_restriction": "text_image_file",
+        "doc": "The unique ID of the task"
+      },
+      "AAG": {
+        "caption": "Name",
+        "name": "name",
+        "rank": 4,
+        "editor": "custom_field_AAD",
+        "field_type_restriction": "text_image_file",
+        "doc": "The name of the task",
+        "value": "text"
+      },
+      "AAH": {
+        "caption": "Progress",
+        "name": "progress",
+        "rank": 5,
+        "editor": "custom_field_AAD",
+        "field_type_restriction": "number",
+        "doc": "A number representing the task's progress out of 100% (ie .20 = 20% // 1 = 100%)"
+      },
+      "AAI": {
+        "caption": "Start Date",
+        "name": "start_date",
+        "rank": 7,
+        "editor": "custom_field_AAD",
+        "field_type_restriction": "date",
+        "doc": "The task's start date"
+      },
+      "AAJ": {
+        "caption": "End Date",
+        "name": "end_date",
+        "rank": 8,
+        "editor": "custom_field_AAD",
+        "field_type_restriction": "date",
+        "doc": "The task's end date"
+      },
+      "AAK": {
+        "caption": "Subtask ID(s) ",
+        "name": "child_item_ids",
+        "rank": 9,
+        "editor": "custom_field_AAD",
+        "field_type_restriction": "text_image_file",
+        "doc": "The ID of the related sub-elements (dependencies), formatted as text with each ID separated by comma (ex: \"id, id2, id3\")",
+        "optional": true,
+        "value": "_any_thing_bindable",
+        "field_list": false
+      },
+      "AAc": {
+        "caption": "View Mode",
+        "name": "view_mode",
+        "rank": 11,
+        "editor": "DynamicValue",
+        "value": "text",
+        "options": "Day,Week,Month",
+        "default_val": "Week",
+        "doc": "Day, Week, or Month view of the Gantt"
+      },
+      "AAk": {
+        "caption": "Show Static Columns?",
+        "name": "show_table",
+        "rank": 12,
+        "editor": "DynamicValue",
+        "value": "boolean",
+        "default_val": false,
+        "doc": "Shows/Hide the table on the left side of the Gantt "
+      },
+      "AAm": {
+        "caption": "Progress bar color",
+        "name": "progress_color",
+        "rank": 21,
+        "editor": "Color",
+        "in_style": false,
+        "default_val": "rgba(87,165,255,1)",
+        "doc": "Sets the color of the progress bar."
+      },
+      "AAn": {
+        "caption": "Header font color",
+        "name": "table_header_font_color",
+        "rank": 23,
+        "editor": "Color",
+        "default_val": "rgba(0, 0, 0, 1)",
+        "in_style": false,
+        "doc": "Sets the font color for the header text."
+      },
+      "AAo": {
+        "caption": "Header color",
+        "name": "table_header_color",
+        "rank": 24,
+        "editor": "Color",
+        "default_val": "rgba(254,189,18,1)",
+        "in_style": false,
+        "doc": "Specifies the background color of the header."
+      },
+      "AAp": {
+        "caption": "Row font color",
+        "name": "table_row_font_color",
+        "rank": 22,
+        "editor": "Color",
+        "default_val": "rgba(0, 0, 0, 1)",
+        "in_style": false,
+        "doc": "Defines the font color for text displayed in the row."
+      },
+      "AAr": {
+        "caption": "Enable Progress Dragging",
+        "name": "toggle_progress_dragging",
+        "rank": 13,
+        "editor": "Checkbox",
+        "value": "boolean",
+        "default_val": true,
+        "doc": "Enable/Disable progress update on the task card."
+      },
+      "AAs": {
+        "caption": "Enable Polymarkers",
+        "name": "show_markers",
+        "rank": 14,
+        "editor": "Checkbox",
+        "value": "boolean",
+        "default_val": true,
+        "doc": "Enable/Disable the markers that connect tasks, allowing users to establish dependencies between them."
+      },
+      "AAw": {
+        "caption": "Header Date Font Color",
+        "name": "header_date_font_color",
+        "rank": 25,
+        "editor": "Color",
+        "default_val": "rgba(0,0,0,1)",
+        "doc": "Specifies the font color for the header date display.\""
+      },
+      "AAx": {
+        "caption": "Header Date Font Size",
+        "name": "header_date_font_size",
+        "rank": 19,
+        "editor": "StaticNumber",
+        "optional": true,
+        "doc": "Specifies the font size for the header date display"
+      },
+      "AAy": {
+        "caption": "Header Month Font Color",
+        "name": "header_month_font_color",
+        "rank": 26,
+        "editor": "Color",
+        "default_val": "rgba(0,0,0,1)",
+        "doc": "Specifies the font color for the header month display."
+      },
+      "AAz": {
+        "caption": "Header Month Font Size",
+        "name": "header_month_font_size",
+        "rank": 20,
+        "editor": "StaticNumber",
+        "optional": true,
+        "doc": "Specifies the font size for the header month display"
+      },
+      "ABB": {
+        "caption": "Marker Color",
+        "name": "marker_color",
+        "rank": 28,
+        "editor": "Color",
+        "default_val": "rgba(255,165,0,1)",
+        "doc": "Sets the color of the marker used to establish the relationship between tasks"
+      },
+      "ABC": {
+        "caption": "Connection Line Color",
+        "name": "polyline_color",
+        "rank": 29,
+        "editor": "Color",
+        "default_val": "rgba(255,0,0,1)",
+        "doc": "Specifies the color of the connection line created when linking two tasks."
+      },
+      "ABE": {
+        "caption": "Enable Label Movement",
+        "name": "enable_label_movement",
+        "rank": 15,
+        "editor": "Checkbox",
+        "default_val": true,
+        "doc": "Enable/Disable the task label to move horizontally within the bar as the user scrolls in the Gantt."
+      },
+      "ABP": {
+        "caption": "Tooltip background",
+        "name": "tooltip_popup_background",
+        "rank": 27,
+        "editor": "Color",
+        "default_val": "rgba(234,234,234,1)",
+        "doc": "Sets the background color of the tooltip."
+      },
+      "ABS": {
+        "caption": "Disable tooltip",
+        "name": "disable_tooltip",
+        "rank": 17,
+        "editor": "Checkbox",
+        "default_val": false,
+        "doc": "Enable/Disable the display of tooltips when hovering over task cards."
+      },
+      "ABX": {
+        "caption": "Description",
+        "name": "description",
+        "rank": 6,
+        "editor": "custom_field_AAD",
+        "field_type_restriction": "text_image_file",
+        "doc": "The description of the task"
+      },
+      "ABY": {
+        "caption": "Display Task Detail On Tooltip",
+        "name": "display_task_detail_on_hover",
+        "rank": 10,
+        "editor": "custom_field_AAD",
+        "optional": true,
+        "doc": "When tooltip is enabled, displays the value of the selected data_type."
+      },
+      "ABk": {
+        "caption": "Move Child with Parent",
+        "name": "move_child_with_parent",
+        "rank": 16,
+        "editor": "Checkbox",
+        "default_val": false,
+        "doc": "Enable/Disable the child to move with the parent tasks it is dragged or moved."
+      },
+      "ABm": {
+        "caption": "Styles & Formatting",
+        "name": "Styles",
+        "rank": 18,
+        "editor": "Label"
+      },
+      "ABn": {
+        "caption": "Data Source",
+        "name": "datasourcesection",
+        "rank": 0,
+        "editor": "Label"
+      },
+      "ABo": {
+        "caption": "Handle Bar Color",
+        "name": "handle_bar_color",
+        "rank": 30,
+        "editor": "Color",
+        "default_val": "rgba(229,223,222,1)"
+      }
+    },
+    "headers": {
+      "snippet": "<script src=\"https://cdn.jsdelivr.net/npm/frappe-gantt/dist/frappe-gantt.umd.js\"></script> \n<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/frappe-gantt/dist/frappe-gantt.css\">\n\n<style>\n    #gantt .side-header button {\n        display: none;\n    }\n    .gantt .arrow path {\n        stroke: red !important;\n    }\n    th {\n    \tfont-size: 20px !important;\n    }\n    td {\n        font-weight: normal !important;\n    }\n    .upper-text{\n        position: absolute !important;\n    }\n    .bar-group .handle-group rect.left {\n        x: var(--left-handle-x, 0); \n    }\n\n    .bar-group .handle-group rect.right {\n        x: var(--right-handle-x, 0); \n    }\n    .marker {\n        cursor: crosshair;\n        display: none;  \n        visibility: hidden;\n        opacity: 0;\n        transition: opacity 0.5s, visibility 0s 0.5s; \n    }\n\n    .bar:hover ~ .marker {\n        display: block !important;\n        visibility: visible !important;\n        opacity: 1 !important;\n    }\n\n    .bar:not(:hover) ~ .marker {\n        display: block !important;\n        visibility: visible !important;\n        opacity: 0;\n        transition: opacity 0.5s, visibility 0s 0.5s;\n        transition-delay: 1s;\n    }\n    .marker:hover {\n        opacity: 1 !important;  \n        visibility: visible !important;  \n    }\n    .marker.dragging {\n        opacity: 1 !important;\n        visibility: visible !important;\n        display: block !important;\n        transition: none;\n    }\n\n    .handle-group rect {\n        display: block !important;\n        visibility: visible !important;\n        opacity: 1 !important;\n    }\n\n        \n</style>\n"
+    },
+    "events": {
+      "AAN": {
+        "caption": "progress bar is updated",
+        "name": "progress_changed",
+        "doc": "Triggered when the progress bar is updated."
+      },
+      "AAO": {
+        "caption": "Date is changed",
+        "name": "date_changed",
+        "doc": "Triggered when the taskbar is either dragged or resized."
+      },
+      "AAb": {
+        "caption": "Task is clicked",
+        "name": "task_clicked",
+        "doc": "Triggered when a taskbar is clicked."
+      },
+      "AAd": {
+        "name": "parent_updated",
+        "caption": "Parent-Child link established",
+        "doc": "Triggered when a task 's marker is connected to another task's marker"
+      },
+      "ABG": {
+        "caption": "Table Control Disabled",
+        "name": "table_control_disabled",
+        "doc": "Triggered when a task's marker is connected to another task's marker, establishing a parent-child link."
+      },
+      "ABf": {
+        "caption": "Date Exceeded when dragging",
+        "name": "date_exceeded",
+        "doc": "Error handling for dragging date handle past its opposite handle."
+      }
+    },
+    "states": {
+      "AAP": {
+        "caption": "Task Id",
+        "name": "task_id",
+        "value": "text",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "The id of the data that is going to be selected or updated in the workflow."
+      },
+      "AAQ": {
+        "caption": "Updated Start Date value",
+        "name": "changed_task_start_date",
+        "value": "date",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "The updated value of the start date data field"
+      },
+      "AAR": {
+        "caption": "Updated End Date value",
+        "name": "changed_task_end_date",
+        "value": "date",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "The updated value of the end date data field"
+      },
+      "AAS": {
+        "name": "changed_task_progress",
+        "value": "number",
+        "initialization_code": {
+          "fn": ""
+        },
+        "caption": "Updated Progress value",
+        "doc": "The updated value of the progress data field"
+      },
+      "AAT": {
+        "caption": "View Mode",
+        "name": "view_mode",
+        "value": "text",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "The value of the current view mode selected in the dropdown."
+      },
+      "AAU": {
+        "caption": "Task Name",
+        "name": "task_name",
+        "value": "text",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "The value of the task name data field, used on clicked event."
+      },
+      "AAV": {
+        "caption": "Progress",
+        "name": "progress",
+        "value": "number",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "The value of the progress data field, used on clicked event."
+      },
+      "AAW": {
+        "caption": "Start Date",
+        "name": "start_date",
+        "value": "date",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "The value of the start date data field, used on clicked event."
+      },
+      "AAX": {
+        "caption": "End Date",
+        "name": "end_date",
+        "value": "date",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "The value of the end date data field, used on clicked event."
+      },
+      "AAe": {
+        "name": "new_parent",
+        "value": "text",
+        "initialization_code": {
+          "fn": ""
+        },
+        "caption": "Parent ID task",
+        "doc": "Parent task id when a polyline is drawn"
+      },
+      "AAf": {
+        "caption": "Child ID task",
+        "name": "child_task_id",
+        "value": "text",
+        "initialization_code": {
+          "fn": ""
+        },
+        "doc": "Child task id when a polyline is drawn"
+      }
+    },
+    "has_reset_fn": true,
+    "actions": {
+      "ABU": {
+        "code": {
+          "fn": ""
+        },
+        "caption": "Refresh",
+        "doc": "Refreshes the gantt chart element "
+      }
+    }
+  }
+}

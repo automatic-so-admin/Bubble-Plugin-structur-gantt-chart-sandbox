@@ -1,0 +1,15 @@
+{
+  "ABR": {
+    "display": "Reset Element",
+    "category": "plugins",
+    "type": "client_side",
+    "code": {
+      "client": {
+        "fn": ""
+      },
+      "server": {
+        "fn": ""
+      }
+    }
+  }
+}
